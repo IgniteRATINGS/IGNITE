@@ -103,7 +103,7 @@ contract Crowdsale {
         require(now > startTime);
 
         if(now < startTime.add(24 hours) && amountRaised < softCapLimit) { /* CHECKS IF SOFT CAP PERIOD STILL IN EFFECT */
-            require(amount.add(contributionByAddress[msg.sender]) > 1 ether && amount.add(contributionByAddress[msg.sender]) <= 5 ether); /* SOFT CAP MINIMUM CONTRIBUTION IS 1 ETH, MAXIMUM CONTRIBUTION IS 5 ETH PER CONTRIBUTOR */
+            require(amount.add(contributionByAddress[msg.sender]) >= 1 ether && amount.add(contributionByAddress[msg.sender]) <= 5 ether); /* SOFT CAP MINIMUM CONTRIBUTION IS 1 ETH, MAXIMUM CONTRIBUTION IS 5 ETH PER CONTRIBUTOR */
             require(amount.mul(10**18).div(discountPrice) <= softCap.sub(tokensSold)); /* REQUIRES SUFFICIENT DISCOUNT TOKENS REMAINING TO COMPLETE PURCHASE */
             contributionByAddress[msg.sender] = contributionByAddress[msg.sender].add(amount);
             amountRaised = amountRaised.add(amount);
